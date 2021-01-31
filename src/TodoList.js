@@ -1,4 +1,7 @@
 import React, { Component, Fragment } from 'react'
+import './style.css'
+
+import TodoItem from './TodoItem'
 
 class TodoList extends Component {
   constructor (props) {
@@ -13,7 +16,10 @@ class TodoList extends Component {
     return (
       <Fragment>
         <div>
+          <label htmlFor='insertArea'>输入内容</label>
           <input
+            id='insertArea'
+            className='input'
             value={this.state.inputValue}
             onChange={this.handleInputChange.bind(this)}
           />
@@ -22,9 +28,8 @@ class TodoList extends Component {
         <ul>
           {this.state.list.map((item, index) => {
             return (
-              <li key={index} onClick={this.handleItemDelete.bind(this, index)}>
-                {item}
-              </li>
+              <TodoItem content={item} index={index} deleteItem={this.handleItemDelete.bind(this)} />
+              // <li key={index} onClick={this.handleItemDelete.bind(this, index)} dangerouslySetInnerHTML={{ __html: item }}></li>
             )
           })}
         </ul>
