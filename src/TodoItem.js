@@ -8,18 +8,15 @@ class TodoItem extends Component {
   }
 
   render () {
-    const { content, test } = this.props
+    console.log('child render')
+    const { content } = this.props
     return (
-      <div onClick={this.handleClick}>{test} - {content}</div>
+      <div onClick={this.handleClick}>{content}</div>
     )
   }
 
-  componentWillReceiveProps () {
-    console.log('child componentWillReceiveProps')
-  }
-
-  componentWillUnmount () {
-    console.log('child componentWillUnmount')
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextProps.content !== this.props.content
   }
 
   handleClick () {
@@ -29,14 +26,9 @@ class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-  test: PropTypes.string.isRequired,
   content: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   deleteItem: PropTypes.func,
   index: PropTypes.number
-}
-
-TodoItem.defaultProps = {
-  test: 'hello world'
 }
 
 export default TodoItem

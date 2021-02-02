@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import TodoItem from './TodoItem'
+import axios from 'axios'
 import './style.css'
 
 class TodoList extends Component {
@@ -14,12 +15,7 @@ class TodoList extends Component {
     this.handleItemDelete = this.handleItemDelete.bind(this)
   }
 
-  componentWillMount () {
-    console.log('componentWillMount')
-  }
-
   render () {
-    console.log('render')
     return (
       <Fragment>
         <div>
@@ -29,7 +25,6 @@ class TodoList extends Component {
             className='input'
             value={this.state.inputValue}
             onChange={this.handleInputChange}
-            ref={(input) => { this.input = input }}
           />
           <button onClick={this.handleButtonClick}>提交</button>
         </div>
@@ -41,20 +36,13 @@ class TodoList extends Component {
   }
 
   componentDidMount () {
-    console.log('componentDidMount')
-  }
-
-  shouldComponentUpdate () {
-    console.log('shouldComponentUpdate')
-    return true
-  }
-
-  componentWillUpdate () {
-    console.log('componentWillUpdate')
-  }
-
-  componentDidUpdate () {
-    console.log('componentDidUpdate')
+    axios.get('/api/todolist').then((res) => {
+      this.setState(() => ({
+        list: [...res.data]
+      }))
+    }).catch(() => {
+      window.alert('error')
+    })
   }
 
   getTodoItem () {
@@ -67,8 +55,7 @@ class TodoList extends Component {
   }
 
   handleInputChange (e) {
-    // const value = e.target.value
-    const { value } = this.input
+    const value = e.target.value
     this.setState(() => ({
       inputValue: value
     }))
