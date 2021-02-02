@@ -14,6 +14,14 @@ class TodoItem extends Component {
     )
   }
 
+  componentWillReceiveProps () {
+    console.log('child componentWillReceiveProps')
+  }
+
+  componentWillUnmount () {
+    console.log('child componentWillUnmount')
+  }
+
   handleClick () {
     const { deleteItem, index } = this.props
     deleteItem(index)
@@ -22,7 +30,7 @@ class TodoItem extends Component {
 
 TodoItem.propTypes = {
   test: PropTypes.string.isRequired,
-  content: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   deleteItem: PropTypes.func,
   index: PropTypes.number
 }
