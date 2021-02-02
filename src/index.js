@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom'
 import Transition from './Transition'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Transition />
-  </React.StrictMode>,
+  <Transition />,
   document.getElementById('root')
 )
