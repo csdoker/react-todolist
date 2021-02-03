@@ -1,4 +1,9 @@
-import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './actionTypes'
+import {
+  CHANGE_INPUT_VALUE,
+  ADD_TODO_ITEM,
+  DELETE_TODO_ITEM,
+  INIT_LIST_ACTION
+} from './actionTypes'
 
 const defaultState = {
   inputValue: '',
@@ -6,6 +11,11 @@ const defaultState = {
 }
 
 const reducer = (state = defaultState, action) => {
+  if (action.type === INIT_LIST_ACTION) {
+    const newState = JSON.parse(JSON.stringify(state))
+    newState.list = action.data
+    return newState
+  }
   if (action.type === CHANGE_INPUT_VALUE) {
     const newState = JSON.parse(JSON.stringify(state))
     newState.inputValue = action.value

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import TodoListUI from './TodoListUI'
 
+import axios from 'axios'
+
 import store from './store'
 import {
   getInputChangeAction,
   getAddItemAction,
-  getDeleteItemAction
+  getDeleteItemAction,
+  initListAction
 } from './store/actionCreators'
 
 class TodoList2 extends Component {
@@ -29,6 +32,14 @@ class TodoList2 extends Component {
         handleItemDelete={this.handleItemDelete}
       />
     )
+  }
+
+  componentDidMount () {
+    axios.get('/api/todolist').then((res) => {
+      const { data } = res
+      const action = initListAction(data)
+      store.dispatch(action)
+    })
   }
 
   handleInputChange (e) {
