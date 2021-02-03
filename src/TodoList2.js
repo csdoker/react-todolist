@@ -6,8 +6,12 @@ import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
-  getTodoList
+  // getTodoList
+  // initListAction,
+  getInitList
 } from './store/actionCreators'
+
+// import axios from 'axios'
 
 class TodoList2 extends Component {
   constructor (props) {
@@ -33,7 +37,12 @@ class TodoList2 extends Component {
   }
 
   componentDidMount () {
-    const action = getTodoList()
+    // redux-thunk
+    // const action = getTodoList()
+    // store.dispatch(action)
+
+    // redux-saga
+    const action = getInitList()
     store.dispatch(action)
   }
 
