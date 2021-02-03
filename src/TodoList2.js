@@ -22,7 +22,7 @@ class TodoList2 extends Component {
           <Input value={this.state.inputValue} placeholder='todo info' style={{ width: '200px', marginRight: '10px' }} onChange={this.handleInputChange} />
           <Button type='primary' onClick={this.handleButtonClick}>提交</Button>
         </div>
-        <List style={{ marginTop: '10px', width: '300px' }} bordered dataSource={this.state.list} renderItem={item => (<List.Item>{item}</List.Item>)} />
+        <List style={{ marginTop: '10px', width: '300px' }} bordered dataSource={this.state.list} renderItem={(item, index) => (<List.Item onClick={this.handleItemDelete.bind(this, index)}>{item}</List.Item>)} />
       </div>
     )
   }
@@ -42,6 +42,14 @@ class TodoList2 extends Component {
   handleButtonClick () {
     const action = {
       type: 'addTodoItem'
+    }
+    store.dispatch(action)
+  }
+
+  handleItemDelete (index) {
+    const action = {
+      type: 'deleteTodoItem',
+      index
     }
     store.dispatch(action)
   }

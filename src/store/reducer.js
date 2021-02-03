@@ -15,6 +15,11 @@ const reducer = (state = defaultState, action) => {
     newState.inputValue = ''
     return newState
   }
+  if (action.type === 'deleteTodoItem') {
+    const newState = JSON.parse(JSON.stringify(state))
+    newState.list.splice(action.index, 1)
+    return newState
+  }
   return state
 }
 
