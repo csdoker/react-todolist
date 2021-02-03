@@ -4,6 +4,7 @@ import { Input, Button, List } from 'antd'
 import 'antd/dist/antd.css'
 
 import store from './store'
+import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './store/actionTypes'
 
 class TodoList2 extends Component {
   constructor (props) {
@@ -29,7 +30,7 @@ class TodoList2 extends Component {
 
   handleInputChange (e) {
     const action = {
-      type: 'changeInputValue',
+      type: CHANGE_INPUT_VALUE,
       value: e.target.value
     }
     store.dispatch(action)
@@ -41,14 +42,14 @@ class TodoList2 extends Component {
 
   handleButtonClick () {
     const action = {
-      type: 'addTodoItem'
+      type: ADD_TODO_ITEM
     }
     store.dispatch(action)
   }
 
   handleItemDelete (index) {
     const action = {
-      type: 'deleteTodoItem',
+      type: DELETE_TODO_ITEM,
       index
     }
     store.dispatch(action)
